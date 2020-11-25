@@ -10,29 +10,29 @@ class Persons extends Component {
         persons: []
     }
 
-    personAddedHandler = () => {
+    // personAddedHandler = () => {
         
-        this.setState( ( prevState ) => {
-            return { persons: prevState.persons.concat(newPerson)}
-        } );
-    }
+    //     this.setState( ( prevState ) => {
+    //         return { persons: prevState.persons.concat(newPerson)}
+    //     } );
+    // }
 
-    personDeletedHandler = (personId) => {
-        this.setState( ( prevState ) => {
-            return { persons: prevState.persons.filter(person => person.id !== personId)}
-        } );
-    }
+    // personDeletedHandler = (personId) => {
+    //     this.setState( ( prevState ) => {
+    //         return { persons: prevState.persons.filter(person => person.id !== personId)}
+    //     } );
+    // }
 
     render () {
         return (
             <div>
-                <AddPerson personAdded={this.personAddedHandler} />
+                <AddPerson personAdded={this.props.addPersonHandler} />
                 {this.state.persons.map(person => (
                     <Person 
                         key={person.id}
                         name={person.name} 
                         age={person.age} 
-                        clicked={() => this.personDeletedHandler(person.id)}/>
+                        clicked={() => this.props.deletePersonHandler(person.id)}/>
                 ))}
             </div>
         );
@@ -48,7 +48,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch  => {
     return {
         addPersonHandler: () => dispatch({ type: actionTypes.ADD }),
-        deletePersonHandler: () => dispatch({ type: actionTypes.DELETE })
+        deletePersonHandler: (personId) => dispatch({ type: actionTypes.DELETE, personId: personId })
     }
 }
 
