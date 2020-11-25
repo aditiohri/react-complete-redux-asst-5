@@ -11,11 +11,7 @@ class Persons extends Component {
     }
 
     personAddedHandler = () => {
-        const newPerson = {
-            id: Math.random(), // not really unique but good enough here!
-            name: 'Max',
-            age: Math.floor( Math.random() * 40 )
-        }
+        
         this.setState( ( prevState ) => {
             return { persons: prevState.persons.concat(newPerson)}
         } );
@@ -45,7 +41,7 @@ class Persons extends Component {
 
 const mapStateToProps = state => {
     return {
-        person: state.person
+        persons: state.persons
     }
 }
 
